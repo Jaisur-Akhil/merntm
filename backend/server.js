@@ -6,8 +6,14 @@ const port = process.env.PORT || 5000;
 
 const app = express();
 
+//Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+//Routing
 app.use('/api/goals', require('./routes/goalRoutes'));
 
+//Server
 app.listen(port, () => console.log(`Server started at ${port}`));
 
 // git commit -m 'Initial commit'

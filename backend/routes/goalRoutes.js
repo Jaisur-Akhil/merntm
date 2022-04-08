@@ -2,24 +2,38 @@
 
 const express = require('express');
 const router = express.Router();
+const {
+  getGoals,
+  setGoals,
+  putGoals,
+  delGoals,
+} = require('../controller/goalController');
 
-//app to router as variable name has changed
-// path is being modified - /api/goals
+//1
+router.get('/', getGoals);
 
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'Get Message' });
-});
+router.post('/', setGoals);
 
-router.post('/', (req, res) => {
-  res.status(200).json({ Message: 'Set Goal' });
-});
+router.put('/:id', putGoals);
 
-router.put('/:id', (req, res) => {
-  res.status(200).json({ message: `update individual goal ${req.params.id}` });
-});
-
-router.delete('/:id', (req, res) => {
-  res.status(200).json({ message: `Delete individual goal ${req.params.id}` });
-});
+router.delete('/:id', delGoals);
+//2
 
 module.exports = router;
+
+/* 2 
+we can do this way also . 
+router.router('/').get(getGoals).post(setGoals);
+router.router('/:id').put(putGoals).delete(delGoals);
+*/
+
+/*
+1.
+app to router as variable name has changed
+path is being modified - /api/goals
+
+
+router.get('/', (req, res) => {
+  res.status(200).json({ message: 'Get Message from controller' });
+});
+*/
